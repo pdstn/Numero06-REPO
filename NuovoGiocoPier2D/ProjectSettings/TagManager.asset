@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Collectable
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 
@@ -43,6 +45,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2032540477
+    locked: 0
+  - name: Personaggi
+    uniqueID: 486014645
     locked: 0
   - name: Foreground
     uniqueID: 2845398661
