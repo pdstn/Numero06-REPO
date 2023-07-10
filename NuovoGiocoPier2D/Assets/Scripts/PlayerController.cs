@@ -50,25 +50,36 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         Frog frog = other.gameObject.GetComponent<Frog>();
-        if (frog != null && state == State.falling)
+        if (frog != null)
         {
-            frog.JumpedOn();
-            Destroy(other.gameObject);
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce * 0.5f);
-        }
-        else if (other.gameObject.tag == "Enemy" && state != State.falling)
-        {
-            state = State.hurt;
-            if (other.gameObject.transform.position.x > transform.position.x)
+            ContactPoint2D[] contacts = other.contacts;
+            if (contacts.Length > 0)
             {
-                rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+                ContactPoint2D contact = contacts[0];
+                if (contact.normal.y > 0.5f)
+                {
+                    frog.JumpedOn();
+                    Jump();
+                    return; // Esci dal metodo per evitare l'esecuzione delle altre condizioni
+                }
             }
-            else
+
+            if (state != State.falling)
             {
-                rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+                state = State.hurt;
+                if (other.gameObject.transform.position.x > transform.position.x)
+                {
+                    rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+                }
             }
         }
     }
+
+
 
 
     private void Movement()
