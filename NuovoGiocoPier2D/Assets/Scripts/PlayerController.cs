@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Collectable")
         {
             Destroy(collision.gameObject);
-            cherries += 1;
+            cherries ++;
             cherryText.text = cherries.ToString();
         }
     }
